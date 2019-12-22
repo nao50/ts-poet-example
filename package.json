@@ -1,0 +1,28 @@
+{
+  "name": "ts-poet-example",
+  "version": "1.0.0",
+  "description": "Example for ts-poet : https://github.com/stephenh/ts-poet",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naoyamaguchi/ts-poet-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/naoyamaguchi/ts-poet-example/issues"
+  },
+  "homepage": "https://github.com/naoyamaguchi/ts-poet-example#readme",
+  "devDependencies": {
+    "ts-loader": "^6.2.1",
+    "ts-poet": "^1.0.0",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
