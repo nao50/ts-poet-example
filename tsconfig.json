@@ -5,6 +5,8 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es5",
-    "module": "es2015"
+    "module": "es2015",
+    "experimentalDecorators": true,
+    "allowJs": true
   }
 }
