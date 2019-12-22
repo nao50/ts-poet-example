@@ -20,7 +20,7 @@ let testInterface = InterfaceSpec.create('User')
   .addProperty('username', TypeNames.STRING, { optional: true, modifiers: [Modifier.PUBLIC] })
   .addProperty('password', TypeNames.STRING, { optional: true, modifiers: [Modifier.PUBLIC] });
 
-let testClass = ClassSpec.create('HogeService')
+let testClass = ClassSpec.create('UserService')
   .addModifiers(Modifier.EXPORT)
   .addDecorator(
     DecoratorSpec.create(SymbolSpec.from('Injectable@@angular/core'))
