@@ -42,13 +42,12 @@
 //   );
 // console.log(FileSpec.create('Test').addInterface(testInterface).addClass(testClass).toString());
 
-import { ClassSpec, CodeBlock, DecoratorSpec, EnumSpec, FileSpec, FunctionSpec, InterfaceSpec, Modifier, PropertySpec, TypeName, TypeNames, Union, SymbolSpecs, ParameterSpec } from 'ts-poet';
-import { SymbolSpec } from 'ts-poet/build/SymbolSpecs';
 import fs from 'fs';
 import yaml from 'js-yaml';
 
 import $RefParser from "json-schema-ref-parser";
 import { OpenAPISchema } from './types/open-api';
+import { FileSpec, InterfaceSpec, Modifier } from 'ts-poet';
 
 const specFile = yaml.safeLoad(fs.readFileSync('./api.yaml', 'utf8'));
 
@@ -71,7 +70,6 @@ $RefParser.dereference(specFile, (err, resolvedSpec) => {
 
     } else if(schema.type) {
       console.log(schema)
-      // writeFile(`lib/${key}.ts`, JSON.stringify(parser.spec.components.schemas.Pet));
     }
   });
 });
