@@ -1,12 +1,16 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
+    "experimentalDecorators": true,
     "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
+    "target": "es2015",
     "module": "es2015",
-    "experimentalDecorators": true,
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
     "allowJs": true
-  }
+  },
+  "compileOnSave": false
 }

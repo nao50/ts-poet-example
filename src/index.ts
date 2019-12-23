@@ -40,6 +40,49 @@
 //             .addStatement("return this.httpClient.get<%T[]>(url)", testInterface.name)
 //         )
 //   );
-
 // console.log(FileSpec.create('Test').addInterface(testInterface).addClass(testClass).toString());
 
+import { ClassSpec, CodeBlock, DecoratorSpec, EnumSpec, FileSpec, FunctionSpec, InterfaceSpec, Modifier, PropertySpec, TypeName, TypeNames, Union, SymbolSpecs, ParameterSpec } from 'ts-poet';
+import { SymbolSpec } from 'ts-poet/build/SymbolSpecs';
+import fs from 'fs';
+import yaml from 'js-yaml';
+
+import $RefParser from "json-schema-ref-parser";
+import { OpenAPISchema } from './types/open-api';
+
+const specFile = yaml.safeLoad(fs.readFileSync('./api.yaml', 'utf8'));
+
+$RefParser.dereference(specFile, (err, resolvedSpec) => {
+  Object.keys(resolvedSpec.components.schemas).forEach((key1) => {
+    let schema = resolvedSpec.components.schemas[key1] as OpenAPISchema;
+    let iface = InterfaceSpec.create(`${key1}`).addModifiers(Modifier.EXPORT)
+
+    if (schema.properties) {
+      Object.keys(schema.properties).forEach((key2) => {
+        iface = iface.addProperty(`${key2}`, getType(schema.properties[key2]), { modifiers: [Modifier.PUBLIC] })
+      });
+
+      let s = FileSpec.create('Test').addInterface(iface).toString()
+      fs.writeFile(`lib/${key1}.ts`, s, function (err) {
+        if (err) {
+            throw err;
+        }
+      });
+
+    } else if(schema.type) {
+      console.log(schema)
+      // writeFile(`lib/${key}.ts`, JSON.stringify(parser.spec.components.schemas.Pet));
+    }
+  });
+});
+
+function getType(prop: OpenAPISchema): string {
+  switch (prop.type) {
+    case 'integer':
+      return 'number';
+    case 'string':
+      return 'string';
+    default:
+      return 'unknown';
+  }
+}
